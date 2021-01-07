@@ -1,0 +1,9 @@
+select Employee.FirstName as First_name, Employee.LastName as Last_name,  STRFTIME('%Y', Invoice.InvoiceDate) as Year, count (*) as sales
+from Employee
+join Customer
+on Employee.EmployeeId = Customer.SupportRepId
+join Invoice
+on Customer.CustomerId = invoice.CustomerId
+where Employee.Title = "Sales Support Agent"
+group by 1,2,3
+order by 1

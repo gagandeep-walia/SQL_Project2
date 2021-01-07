@@ -1,0 +1,11 @@
+With Table1 As (Select Track.TrackId, Track.Name as TrackName, Album.Title as AlbumName, sum(InvoiceLine.UnitPrice*InvoiceLine.Quantity) as TotalSale
+From Track
+JOIN Album
+On Album.AlbumId = Track.AlbumId
+Join InvoiceLine
+On InvoiceLine.TrackId = Track.TrackId
+Group by 1
+Order by 4 DESC)
+Select TrackId, TrackName, AlbumName, TotalSale
+From Table1
+Where TotalSale >= (Select max(TotalSale) from Table1)

@@ -1,0 +1,10 @@
+select  strftime('%Y', invoice.invoicedate) as years, strftime('%m', Invoice.InvoiceDate) as months, sum(invoiceline.UnitPrice*InvoiceLine.Quantity) as income, Genre.Name as Genres
+from Invoice
+join InvoiceLine
+on invoice.InvoiceId = InvoiceLine.InvoiceId
+join Track
+on track.TrackId = InvoiceLine.TrackId
+join Genre
+on Genre.GenreId = Track.GenreId
+where Genre.Name = 'Rock' and Invoice.InvoiceDate between '2011-01-01' and '2013-01-01'
+GROUP by 1,2;

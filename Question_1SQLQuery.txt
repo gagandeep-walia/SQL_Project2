@@ -1,0 +1,14 @@
+select Customer.Country, strftime('%Y', invoice.InvoiceDate) as years, sum(invoiceline.UnitPrice*InvoiceLine.Quantity) as Income, Genre.Name
+from Customer
+join Invoice
+on Customer.CustomerId = Invoice.CustomerId
+join InvoiceLine
+on Invoice.InvoiceId = InvoiceLine.InvoiceId
+join Track
+on track.TrackId = InvoiceLine.TrackId
+join Genre
+on Genre.GenreId = track.GenreId
+where Country = 'USA'
+group by years, Genre.Name
+order by income desc;
+
